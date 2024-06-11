@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div,
+      p {
+        border: 1px solid navy;
+        display: inline-block;
+        height: 60px;
+        margin: 10px;
+        padding-top: 40px;
+        text-align: center;
+        width: 100px;
+      }
+      .c1 {
+        background: #eee;
+      }
+      button {
+        margin-left: 25px;
+        margin-top: 30px;
+        width: 90px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="d1" class="c1" name="n1">d1,c1,n1</div>
+    <div id="d2" class="c2" name="n1">d2,c2,n1</div>
+    <div id="d3" class="c1 c2">d3,c1,c2</div>
+    <p id="p1" class="c1">p1,c1</p>
+    <p id="p2" class="c2" name="n1">p2,c2,n1</p>
+    <br />
+    <button onclick="selD1()">id=d1</button>
+    <button onclick="selC1()">class=c2</button>
+    <button onclick="selP()">tag=p</button>
+    <button onclick="selN1()">name=n1</button>
+    <button onclick="crl()">clear</button>
+    <button onclick="selP1()">id=p1</button>
+    <button onclick="div()">div</button>
+    <button onclick="selC1AndOrC2()">class=c1 and/or c2</button>
+    <button onclick="selC1AndC2DivId3()">class=c1 and c2</button>
+    <button id="copyButton" onclick="createCopy(this)">Копировать</button>
+    <button id="selfDeleteButton" onclick="deleteSelf(this)">Удалить</button>
+
+    <script>
+      function selD1() {
+        let elem = document.getElementById("d1");
+        elem.style.backgroundColor = "#cfc";
+      }
+      function selC1() {
+        let elems = document.getElementsByClassName("c2");
+        for (elem of elems) {
+          elem.style.backgroundColor = "#fcc";
+        }
+      }
+      function selP() {
+        let elems = document.getElementsByTagName("p");
+        for (elem of elems) {
+          elem.style.backgroundColor = "#ccf";
+        }
+      }
+      function selN1() {
+        let elems = document.getElementsByName("n1");
+        for (elem of elems) {
+          elem.style.backgroundColor = "#bef";
+        }
+      }
+      function selP1() {
+        let elem = document.getElementById("p1");
+        elem.style.backgroundColor = "#bef";
+      }
+      function div() {
+        let elems = document.querySelectorAll("div");
+        for (elem of elems) {
+          elem.style.backgroundColor = "#ccf";
+        }
+      }
+      function crl() {
+        let elems = document.querySelectorAll("div,p");
+        for (elem of elems) {
+          elem.style.backgroundColor = "#eee";
+        }
+      }
+      function selC1AndOrC2() {
+        let elems = document.querySelectorAll("[class]");
+        for (elem of elems) {
+          elem.style.backgroundColor = "#ff1397";
+        }
+      }
+      function selC1AndC2DivId3() {
+        let elem = document.getElementById("d3");
+        elem.style.backgroundColor = "#74ff13";
+      }
+      function createCopy(button) {
+        let newButton = document.createElement("button");
+        newButton.textContent = button.textContent;
+        newButton.onclick = function () {
+          createCopy(newButton);
+        };
+        document.body.appendChild(newButton);
+      }
+      function deleteSelf(button) {
+        button.remove();
+      }
+    </script>
+  </body>
+</html>
