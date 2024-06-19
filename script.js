@@ -1,33 +1,20 @@
-//Задание 1 которое 2
-function factorial(n) {
-  if (n === 0 || n === 1) {
-    return 1;
-  }
-  return n * factorial(n - 1);
-}
-console.log(factorial(7));
-console.log(factorial(0));
-console.log(factorial(1));
-console.log(factorial(8));
-//Задание 2 которое 3
-function geolocation() {
-  let intervalID = setInterval(function () {
-    let result = confirm("Включите геолокацию");
-    if (result) {
-      clearInterval(intervalID);
-    }
-  }, 1000);
-}
-geolocation();
-//Второй способ
-function geolocation2() {
-  function ask() {
-    let result = confirm("Включите геолокацию");
-    if (result) {
+document
+  .getElementById("registrationForm")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+    let username = document.getElementById("username").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
+    let error = document.getElementById("error");
+    if (username.length < 2) {
+      error.textContent = "Имя пользователя должно быть минимум из 2 букв";
       return;
     }
-    setTimeout(ask, 1000);
-  }
-  ask();
-}
-geolocation2();
+    if (password !== confirmPassword) {
+      error.textContent = "Пароли не совпадают";
+      return;
+    }
+    error.textContent = "";
+    alert("Регистрация успешна");
+  });
